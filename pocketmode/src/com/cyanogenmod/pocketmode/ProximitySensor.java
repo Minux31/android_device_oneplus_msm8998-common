@@ -48,19 +48,10 @@ public class ProximitySensor implements SensorEventListener {
                 mContext.getSystemService(Context.SENSOR_SERVICE);
         mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
 
-        if (FileUtils.fileExists(CHEESEBURGER_FILE)) {
+        if (android.os.Build.DEVICE.equals("OnePlus5")) {
             FPC_FILE = CHEESEBURGER_FILE;
-            found = true;
-        } else if (FileUtils.fileExists(DUMPLING_FILE)) {
-            FPC_FILE = DUMPLING_FILE;
-            found = true;
         } else {
-            Log.e(TAG, "No proximity state file found!");
-            FPC_FILE = CHEESEBURGER_FILE;
-        }
-
-        if (found) {
-            if (DEBUG) Log.d(TAG, "Using proximity state from " + FPC_FILE);
+            FPC_FILE = DUMPLING_FILE;
         }
     }
 
