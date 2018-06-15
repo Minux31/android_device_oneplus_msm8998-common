@@ -109,7 +109,7 @@ on post-fs-data
     mkdir /data/nfc
     mkdir /data/oemnvitems  0771 radio radio
 
-    # Fingerint, changhua add for fp debug image usage,feature default off
+    #fingerint, changhua add for fp debug image usage,feature default off
     mkdir /data/fpc_images 0770 system system
     mkdir /data/fpc_images/verify 0770 system system
     mkdir /data/fpc_images/enroll 0770 system system
@@ -125,9 +125,8 @@ on post-fs-data
     # Generate wifi mac
     start wifi-mac-generator
 
-    # Generate bt mac
-    start bt-mac-generator
-
+# For cpusets initialize for Silver Only first and then Silver + Gold
+# Silver Only configuration cannot work with 0-7
 on boot
     start rmt_storage
     start rfs_access
@@ -274,14 +273,7 @@ service wifi-mac-generator /vendor/bin/wifi-mac-generator
     disabled
     seclabel u:r:wifi_mac_generator:s0
 
-service bt-mac-generator /system/vendor/bin/bt-mac-generator
-    class main
-    user bluetooth
-    group bluetooth
-    oneshot
-    disabled
-    seclabel u:r:bt_mac_generator:s0
-
+#Peripheral manager
 service per_mgr /vendor/bin/pm-service
     class core
     user system
