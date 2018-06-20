@@ -397,6 +397,7 @@ PRODUCT_BOOT_JARS += \
     qcrilhook \
     telephony-ext
 
+# List Of APNS
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/common/etc/apns-full-conf.xml:system/etc/apns-conf.xml
 
